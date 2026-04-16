@@ -1,24 +1,10 @@
 import type { Node, Edge } from 'reactflow';
+import type { IShaderResult } from './IShaderResult';
+import type { CompilerOutput } from './CompilerOutput';
 
-// Atention! This is desorgonized at the moment. I need answers before continuing...
-
-// TODO: future function?
-/*export function exportToMinecraft(nodes: Node[], edges: Edge[]): string {
-    let vertexShader = "#version 150\n";
-    let fragmentShader = "#version 150\n";
-
-    // TODO: I don't know if they are two functions or it's just a parameter that
-    // changes the versions and probably some other things depending on it'll be
-    // renderer in web or minecraft. (?)
-
-    return fragmentShader;
-}*/
-
-// TODO: I have to create an object or something to return both vertex and fragment. I don't know
-// how Three.js receives them.
-export function exportToWeb(nodes: Node[], edges: Edge[]): string {
-    //let vertexShader = "#version 300 es\n";
-    let fragmentShader = "#version 300 es\n";
+export function exportToWeb(nodes: Node[], edges: Edge[], outputType: CompilerOutput): IShaderResult {
+    let vertexShader = outputType.getGLSLVersion() + "\n";
+    let fragmentShader = outputType.getGLSLVersion() + "\n";
 
     // This is important because of dependency problems.
     let sortedNodeIds = applyKahnTopologicalOrder(nodes, edges);
@@ -72,7 +58,10 @@ export function exportToWeb(nodes: Node[], edges: Edge[]): string {
 
     fragmentShader += "}\n";
 
-    return fragmentShader;
+    return {
+        vertex: vertexShader,
+        fragment: fragmentShader,
+    }
 }
 
 function applyKahnTopologicalOrder(nodes: Node[], edges: Edge[]): string[] {
