@@ -27,7 +27,6 @@ export interface IProjectContext {
         onSettingChange: (key: string, value: any) => void;
     }>;
     createPreviewStrategy: () => IPreviewStrategy;
-    
-  
+
     getExporter: () => IWorkspaceExporter | null; 
 }
