@@ -1,6 +1,6 @@
-// src/components/BaseNode.tsx
 import { Handle, Position, useEdges } from 'reactflow';
 import type { NodeDefinition } from '../types/node-def';
+import { useEffect, useState } from 'react';
 
 const nodeStyle = {
   backgroundColor: '#1e1e1e',
@@ -33,11 +33,26 @@ interface BaseNodeProps {
   definition: NodeDefinition;
 }
 
+
 export function BaseNode({ id, data, definition }: BaseNodeProps) {
   const { inputs, updateNodeValue } = data;
   const edges = useEdges();
 
+  const [localValues, setLocalValues] = useState<Record<string, any>>({});
+
+  // Sincronized the local state with the props when the node is loaded for the first time.
+  useEffect(() => {
+    const initialVals: Record<string, any> = {};
+    definition.inputs.forEach(defInput => {
+      const propVal = inputs?.find((i: any) => i.id === defInput.id)?.value;
+      initialVals[defInput.id] = propVal ?? defInput.default;
+    });
+    setLocalValues(initialVals);
+  }, [inputs, definition.inputs]); // Resynchronization in case the global inputs changes.
+
   const handleValueChange = (inputId: string, value: any) => {
+    // Update the visual UI.
+    setLocalValues(prev => ({ ...prev, [inputId]: value }));
     updateNodeValue(id, inputId, value);
   };
 

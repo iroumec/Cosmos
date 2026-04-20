@@ -64,7 +64,7 @@ export const NODE_DEFINITIONS: Record<string, NodeDefinition> = {
     ],
     outputs: [{ id: 'out', type: 'float' }],
     strategy: {
-     globalFunctions: `uniform float u_time;`,
+      globalFunctions: `uniform float u_time;`,
       generateCode: ({ resolveInput, varName }) => `    float ${varName} = u_time * ${resolveInput('speed')};`
     }
   },
@@ -72,8 +72,19 @@ export const NODE_DEFINITIONS: Record<string, NodeDefinition> = {
     type: 'OUTPUT_FRAG',
     label: 'Fragment Output',
     color: '#51cf66',
-    inputs: [{ id: 'color', type: 'vec3', default: {r:0, g:0, b:0} },
-    { id: 'alpha', type: 'float', default: 1.0, control: { id: 'alpha', label: 'Alpha', type: 'slider', min: 0, max: 1, step: 0.05 } }],
+    inputs: [
+      {
+        id: 'color',
+        type: 'vec3',
+        default: {r:0, g:0, b:0}
+      },
+      {
+        id: 'alpha',
+        type: 'float',
+        default: 1.0,
+        control: { id: 'alpha', label: 'Alpha', type: 'slider', min: 0.1, max: 1.0, step: 0.05 },
+      }
+    ],
     outputs: [],
     strategy: {
       generateCode: ({ resolveInput }) => `    gl_FragColor = vec4(vec3(${resolveInput('color')}), ${resolveInput('alpha')});`

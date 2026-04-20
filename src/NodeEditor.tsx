@@ -119,9 +119,22 @@ export default function NodeEditor({
   const updateNodeValue = useCallback((nodeId: string, inputId: string, newValue: any) => {
     setNodes((nds) => nds.map((node) => {
         if (node.id === nodeId) {
-          const newInputs = node.data.inputs.map((inp: any) =>
-            inp.id === inputId ? { ...inp, value: newValue } : inp
-          );
+          
+          // Does the input already exists in the memory of the old node?
+          const inputExists = node.data.inputs.some((inp: any) => inp.id === inputId);
+          
+          let newInputs;
+          
+          if (inputExists) {
+              // If it already exists, it is mapped and updated.
+              newInputs = node.data.inputs.map((inp: any) =>
+                inp.id === inputId ? { ...inp, value: newValue } : inp
+              );
+          } else {
+              // Otherwise, if the node is old and doesn't have an input, it is added.
+              newInputs = [...node.data.inputs, { id: inputId, type: 'float', value: newValue }];
+          }
+
           return { ...node, data: { ...node.data, inputs: newInputs } };
         }
         return node;
