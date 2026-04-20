@@ -1,6 +1,4 @@
-// src/core/shapes/ShapeRegistry.ts
 import * as THREE from 'three';
-
 
 export interface IShapeGenerator {
     generate(): THREE.BufferGeometry;

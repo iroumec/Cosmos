@@ -1,9 +1,10 @@
 // src/Canvas3D.tsx
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { compileShader } from './core/compiler';
+import { compileShader } from './compiler/Compiler';
 import type { ShaderGraph } from './types/ast';
 import type { IProjectContext, IPreviewStrategy } from './types/context';
+import { WebTarget } from './compiler/WebTarget';
 
 interface Canvas3DProps {
   graph: ShaderGraph;
@@ -114,7 +115,7 @@ export default function Canvas3D({ graph, contextSettings, activeContext, global
     if (!materialRef.current || !targetGraph.nodes || targetGraph.nodes.length === 0) return;
 
     try {
-      const { vertexShader, fragmentShader } = compileShader(targetGraph);
+      const { vertexShader, fragmentShader } = compileShader(targetGraph, new WebTarget());
       materialRef.current.vertexShader = vertexShader;
       materialRef.current.fragmentShader = fragmentShader;
       materialRef.current.needsUpdate = true;

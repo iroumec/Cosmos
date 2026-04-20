@@ -7,8 +7,6 @@ interface HistoryState {
     edges: Edge[];
 }
 
-
-
 export function useHistory(
     initialPast: HistoryState[] = [],   
     initialFuture: HistoryState[] = [], 
@@ -26,8 +24,7 @@ export function useHistory(
         setPast(newPast || []);
         setFuture(newFuture || []);
     }, []);
-    
-   
+
     const takeSnapshot = useCallback(() => {
         setPast((p = []) => [...p, { nodes: currentNodes, edges: currentEdges }]);
         setFuture([]);
@@ -40,7 +37,7 @@ export function useHistory(
         const newPast = past.slice(0, past.length - 1);
         
         setPast(newPast);
-       
+
         setFuture((f) => [{ nodes: currentNodes, edges: currentEdges }, ...f]);
         
         // Apply the previous state

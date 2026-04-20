@@ -1,4 +1,3 @@
-// src/core/export/MetadataExtractor.ts
 import type { ShaderGraph } from '../../types/ast';
 import type { CosmosMetadata, IMetadataExtractor, ExportConfig, UniformMeta } from '../../types/export';
 

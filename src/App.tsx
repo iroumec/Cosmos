@@ -1,20 +1,16 @@
-// src/App.tsx
-import { useState, useEffect, useMemo, useCallback } from 'react';
-import NodeEditor from './NodeEditor';
 import Canvas3D from './Canvas3D';
-import { MaterialContext } from './core/contexts/MaterialContext';
-import { TrailContext } from './core/contexts/TrailContext';
-import type { ShaderGraph, NodeType } from './types/ast';
-import type { IWorkspaceStorage } from './core/storage/IWorkspaceStorage';
-import type { SavedWorkspace } from './types/workspace';
+import NodeEditor from './NodeEditor';
 import type { Node, Edge } from 'reactflow';
-import type { useHistory } from './core/hooks/useHistory';
+import type { SavedWorkspace } from './types/workspace';
+import type { ShaderGraph, NodeType } from './types/ast';
+import { TrailContext } from './core/contexts/TrailContext';
+import { useState, useEffect, useMemo, useCallback } from 'react';
+import { MaterialContext } from './core/contexts/MaterialContext';
+import type { IWorkspaceStorage } from './core/storage/IWorkspaceStorage';
 
 interface AppProps {
     storage: IWorkspaceStorage;
 }
-
-
 
 const AVAILABLE_CONTEXTS = [MaterialContext, TrailContext]; 
 
@@ -126,23 +122,23 @@ function App({ storage }: AppProps) {
     <div style={{ display: 'flex', width: '100vw', height: '100vh' }}>
       <div style={{ flex: 1 }}>
         <NodeEditor 
-           activeContext={activeContext}
-           availableContexts={AVAILABLE_CONTEXTS}
-           rfNodes={workspaces[activeContextId].rfNodes}
-           rfEdges={workspaces[activeContextId].rfEdges}
-           graph={workspaces[activeContextId].graph}
-           contextSettings={workspaces[activeContextId].settings}
-           onFlowChange={handleFlowChange}
-           initialPast={workspaces[activeContextId].historyPast}
-           initialFuture={workspaces[activeContextId].historyFuture}
-           onSettingChange={handleSettingChange}
-           allWorkspaces={workspaces}
-           onContextChange={setActiveContextId}
-           storage={storage}
-           loadedWorkspace={loadedWorkspace}
-           onLoadWorkspace={handleLoadWorkspace}
-           globalSettings={globalSettings}
-           onGlobalSettingChange={(key, value) => setGlobalSettings(prev => ({ ...prev, [key]: value }))}
+          activeContext={activeContext}
+          availableContexts={AVAILABLE_CONTEXTS}
+          rfNodes={workspaces[activeContextId].rfNodes}
+          rfEdges={workspaces[activeContextId].rfEdges}
+          graph={workspaces[activeContextId].graph}
+          contextSettings={workspaces[activeContextId].settings}
+          onFlowChange={handleFlowChange}
+          initialPast={workspaces[activeContextId].historyPast}
+          initialFuture={workspaces[activeContextId].historyFuture}
+          onSettingChange={handleSettingChange}
+          allWorkspaces={workspaces}
+          onContextChange={setActiveContextId}
+          storage={storage}
+          loadedWorkspace={loadedWorkspace}
+          onLoadWorkspace={handleLoadWorkspace}
+          globalSettings={globalSettings}
+          onGlobalSettingChange={(key, value) => setGlobalSettings(prev => ({ ...prev, [key]: value }))}
         />
       </div>
       <div style={{ flex: 1 }}>

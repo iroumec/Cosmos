@@ -1,12 +1,13 @@
 // src/core/exporter/MaterialExporter.ts
+import { compileShader } from '../../compiler/Compiler';
+import { MinecraftTarget } from '../../compiler/MinecraftTarget';
 import type { ShaderGraph } from '../../types/ast';
 import type { IWorkspaceExporter, ExportResult } from '../../types/export';
-import { compileShader } from '../compiler';
 
 export class MaterialExporter implements IWorkspaceExporter {
     async export(graph: ShaderGraph, settings: Record<string, any>, globalSettings: { namespace: string; projectName: string }): Promise<ExportResult[]> {
         
-        const { vertexShader, fragmentShader } = compileShader(graph, 'minecraft');
+        const { vertexShader, fragmentShader } = compileShader(graph, new MinecraftTarget());
         const safeName = globalSettings.projectName.toLowerCase().replace(/\s+/g, '_');
 
         const manifest = JSON.stringify({

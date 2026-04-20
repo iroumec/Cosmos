@@ -1,5 +1,3 @@
-// src/core/contexts/MaterialContext.tsx
-import React from 'react';
 import * as THREE from 'three';
 import type { IProjectContext, IPreviewStrategy } from '../../types/context';
 import { ShapeRegistry } from '../shapes/ShapeRegistry';
@@ -72,7 +70,6 @@ export const MaterialContext: IProjectContext = {
                     mesh.geometry = generator.generate();
                     oldGeo.dispose();
 
-                   
                     if (currentShape !== '2D_QUAD') {
                         mesh.rotation.set(0, 0, 0);
                     }

@@ -1,9 +1,8 @@
-// src/core/exporter/TrailExporter.ts
 import JSZip from 'jszip';
 import type { ShaderGraph } from '../../types/ast';
 import type { IWorkspaceExporter, ExportResult } from '../../types/export';
 import { MaterialExporter } from './MaterialExporter';
-import { serializeValue } from '../compiler';
+import { serializeValue } from '../../compiler/Serializer';
 
 export class TrailExporter implements IWorkspaceExporter {
     private matExporter = new MaterialExporter();

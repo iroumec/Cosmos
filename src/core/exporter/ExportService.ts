@@ -1,5 +1,5 @@
-// src/core/export/ExportService.ts
-import { compileShader } from '../compiler';
+import { compileShader } from '../../compiler/Compiler';
+import { MinecraftTarget } from '../../compiler/MinecraftTarget';
 import type { ShaderGraph } from '../../types/ast';
 import type { ExportConfig, IMetadataExtractor } from '../../types/export';
 
@@ -17,7 +17,7 @@ export class ExportService {
     }
 
     public generatePackage(graph: ShaderGraph, config: ExportConfig): ExportPackage {
-        const shaders = compileShader(graph, 'minecraft');
+        const shaders = compileShader(graph, new MinecraftTarget());
         const metadata = this.extractor.extract(graph, config);
 
         // Future syntax adaptation (Three.js -> Vanilla GLSL) is injected here
