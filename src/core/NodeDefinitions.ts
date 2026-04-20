@@ -1,4 +1,3 @@
-// src/core/NodeDefinitions.ts
 import type { NodeDefinition } from '../types/node-def';
 
 export const NODE_DEFINITIONS: Record<string, NodeDefinition> = {

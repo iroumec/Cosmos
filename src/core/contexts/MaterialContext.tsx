@@ -55,11 +55,16 @@ export const MaterialContext: IProjectContext = {
                 mesh = new THREE.Mesh(generator.generate(), material);
                 scene.add(mesh);
             },
-            update: (time, settings) => {
-                // Only spin the mesh if we are NOT in 2D mode
-                if (mesh && currentShape !== '2D_QUAD') {
-                    mesh.rotation.x += 0.005;
-                    mesh.rotation.y += 0.005;
+            update: (time, _settings) => {
+                if (mesh) {
+                    if ((mesh.material as THREE.ShaderMaterial).uniforms?.u_time) {
+                        (mesh.material as THREE.ShaderMaterial).uniforms.u_time.value = time;
+                    }
+
+                    if (currentShape !== '2D_QUAD') {
+                        mesh.rotation.x += 0.005;
+                        mesh.rotation.y += 0.005;
+                    }
                 }
             },
             onSettingsChange: (settings) => {
