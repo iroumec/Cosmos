@@ -25,7 +25,7 @@ const getInitialState = () => {
     return null;
 };
 
-function App({ storage }: AppProps) {
+function App({ storage }: Readonly<AppProps>) {
   const initialState = getInitialState();
 
   // Initialize state with stored data or fallback to defaults

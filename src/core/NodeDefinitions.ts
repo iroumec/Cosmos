@@ -311,8 +311,8 @@ float ridge3D(vec3 p) {
     label: 'Math (Binary)',
     color: '#868e96',
     inputs: [
-      { id: 'a', type: 'float', default: 1.0, control: { type: 'number', label: 'A', step: 0.1 } },
-      { id: 'b', type: 'float', default: 1.0, control: { type: 'number', label: 'B', step: 0.1 } },
+      { id: 'a', type: 'float', default: 1, control: { type: 'number', label: 'A', step: 0.1 } },
+      { id: 'b', type: 'float', default: 1, control: { type: 'number', label: 'B', step: 0.1 } },
       { id: 'op', type: 'string', default: 'multiply', control: { id: 'op', label: 'Operation', type: 'select', options: ['add', 'subtract', 'multiply', 'divide', 'pow', 'max', 'min'] } }
     ],
     outputs: [{ id: 'out', type: 'float' }],

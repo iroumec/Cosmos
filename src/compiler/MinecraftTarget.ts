@@ -3,15 +3,15 @@ import type { ICompilerTarget } from './ICompilerTarget';
 export class MinecraftTarget implements ICompilerTarget {
     
     private applyTranslations(globals: string, main: string) {
-        let g = globals.replace(/uniform float u_time;/g, '');
-        g = g.replace(/\bgl_FragColor\b/g, 'fragColor');
+        let g = globals.replaceAll(/uniform float u_time;/g, '');
+        g = g.replaceAll(/\bgl_FragColor\b/g, 'fragColor');
 
-        let m = main.replace(/\bu_time\b/g, 'CosmosTime');
-        m = m.replace(/\buv\b/g, 'UV0');
-        m = m.replace(/\bposition\b/g, 'Position');
-        m = m.replace(/\bprojectionMatrix\b/g, 'ProjMat');
-        m = m.replace(/\bmodelViewMatrix\b/g, 'ModelViewMat');
-        m = m.replace(/\bgl_FragColor\b/g, 'fragColor');
+        let m = main.replaceAll(/\bu_time\b/g, 'CosmosTime');
+        m = m.replaceAll(/\buv\b/g, 'UV0');
+        m = m.replaceAll(/\bposition\b/g, 'Position');
+        m = m.replaceAll(/\bprojectionMatrix\b/g, 'ProjMat');
+        m = m.replaceAll(/\bmodelViewMatrix\b/g, 'ModelViewMat');
+        m = m.replaceAll(/\bgl_FragColor\b/g, 'fragColor');
 
         return { translatedGlobals: g, translatedMain: m };
     }

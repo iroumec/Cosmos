@@ -13,7 +13,7 @@ interface Canvas3DProps {
   globalMaterial: ShaderGraph;
 }
 
-export default function Canvas3D({ graph, contextSettings, activeContext, globalMaterial }: Canvas3DProps) {
+export default function Canvas3D({ graph, contextSettings, activeContext, globalMaterial }: Readonly<Canvas3DProps>) {
   const mountRef = useRef<HTMLDivElement>(null);
   const requestRef = useRef<number>(0);
   
@@ -23,7 +23,7 @@ export default function Canvas3D({ graph, contextSettings, activeContext, global
 
   useEffect(() => {
     settingsRef.current = contextSettings;
-    if (strategyRef.current && strategyRef.current.onSettingsChange) {
+    if (strategyRef.current?.onSettingsChange) {
         strategyRef.current.onSettingsChange(contextSettings);
     }
   }, [contextSettings]);
@@ -70,7 +70,7 @@ export default function Canvas3D({ graph, contextSettings, activeContext, global
             materialRef.current.uniforms.u_time.value = time * 0.001;
         }
 
-        if (strategyRef.current && strategyRef.current.update) {
+        if (strategyRef.current?.update) {
             strategyRef.current.update(time, settingsRef.current);
         }
 
@@ -99,7 +99,7 @@ export default function Canvas3D({ graph, contextSettings, activeContext, global
       cancelAnimationFrame(requestRef.current);
       window.removeEventListener('resize', handleResize);
       renderer.dispose();
-      if (strategyRef.current && strategyRef.current.dispose) strategyRef.current.dispose();
+      if (strategyRef.current?.dispose) strategyRef.current.dispose();
       if (materialRef.current) materialRef.current.dispose();
       if (mountRef.current) mountRef.current.innerHTML = '';
     };

@@ -1,4 +1,3 @@
-// src/types/node-def.ts
 import type { NodeType, GLSLType } from './ast';
 import type { NodeStrategy } from './compiler';
 
@@ -11,7 +10,6 @@ export interface NodeControl {
   step?: number;
   options?: string[];
 }
-
 
 export interface NodeDefinition {
   type: NodeType;

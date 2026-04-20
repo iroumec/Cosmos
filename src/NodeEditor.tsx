@@ -1,10 +1,10 @@
 // src/NodeEditor.tsx
-import { useState, useCallback, useEffect, useMemo, useRef } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import ReactFlow, { Background, Controls, applyNodeChanges, applyEdgeChanges, addEdge, Panel } from 'reactflow';
 import type { NodeChange, EdgeChange, Node, Edge, Connection } from 'reactflow';
 import 'reactflow/dist/style.css';
 
-import type { ShaderGraph, ShaderNode, ShaderConnection, NodeType } from './types/ast';
+import type { ShaderGraph } from './types/ast';
 import { NODE_DEFINITIONS } from './core/NodeDefinitions';
 import { BaseNode } from './components/BaseNode';
 import type { IProjectContext } from './types/context';
@@ -61,7 +61,7 @@ export default function NodeEditor({
     onLoadWorkspace,
     globalSettings,
     onGlobalSettingChange
-}: NodeEditorProps) {
+}: Readonly<NodeEditorProps>) {
   
   const [nodes, setNodes] = useState<Node[]>(rfNodes);
   const [edges, setEdges] = useState<Edge[]>(rfEdges);
@@ -83,7 +83,7 @@ export default function NodeEditor({
 
     history.setHistory(initialPast, initialFuture);
 
-    if (loadedWorkspace && loadedWorkspace.contextId === activeContext.id) {
+    if (loadedWorkspace?.contextId === activeContext.id) {
       setNodes(loadedWorkspace.nodes);
       setEdges(loadedWorkspace.edges);
     } else {
