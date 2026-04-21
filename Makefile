@@ -30,3 +30,12 @@ docker-stop-all-containers:
 
 docker-remove-all-containers:
 	@docker rm $$(docker ps -a -q)
+
+merge-upstream: ## Merges in upstream changes.
+	@git rebase upstream/main
+	@git checkout master
+	@git merge upstream/master
+
+add-upstream: ## Adds an upstream remote.
+	@git remote add upstream https://github.com/AgusDropOut/cosmos
+	@git fetch upstream
