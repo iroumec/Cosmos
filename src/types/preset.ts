@@ -1,4 +1,3 @@
-// src/types/preset.ts
 import type { Node, Edge } from 'reactflow';
 
 export interface IPreset {

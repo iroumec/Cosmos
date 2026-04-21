@@ -38,7 +38,7 @@ export function BaseNode({ id, data, definition }: BaseNodeProps) {
   const { inputs, updateNodeValue } = data;
   const edges = useEdges();
 
-  const [localValues, setLocalValues] = useState<Record<string, any>>({});
+  const [_localValues, setLocalValues] = useState<Record<string, any>>({});
 
   // Sincronized the local state with the props when the node is loaded for the first time.
   useEffect(() => {

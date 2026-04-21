@@ -61,11 +61,5 @@ export function useShaderCompiler({ nodes, edges, past, future, onFlowChange }: 
 
         onFlowChange(nodes, edges, { nodes: astNodes, connections: astConnections }, past, future);
         
-<<<<<<< HEAD
-    
-
-    }, [compilerHash]); 
-=======
-  }, [nodes, edges, past, future, onFlowChange]);
->>>>>>> 574cd79 (Old compiler deleted)
+    }, [nodes, edges, past, future, onFlowChange]);
 }

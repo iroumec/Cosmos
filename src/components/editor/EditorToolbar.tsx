@@ -6,7 +6,7 @@ import type { Node, Edge } from 'reactflow';
 import { useState, useRef, useEffect } from 'react';
 
 
- interface EditorToolbarProps {
+interface EditorToolbarProps {
     globalSettings: { namespace: string; projectName: string };
     onGlobalSettingChange: (key: string, value: any) => void;
     activeContext: IProjectContext;
@@ -136,7 +136,7 @@ export function EditorToolbar({
                     {availableContexts.map(ctx => <option key={ctx.id} value={ctx.id}>{ctx.name}</option>)}
                 </select>
                 <button onClick={handleGameExport} style={{ ...menuButtonStyle, background: '#194225', color: '#40c057', border: '1px solid #2b8a3e', fontWeight: 'bold' }}>
-                    🚀 Export to Minecraft
+                    Export to Minecraft
                 </button>
             </div>
         </div>

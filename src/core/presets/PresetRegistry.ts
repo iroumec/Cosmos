@@ -1,7 +1,4 @@
-// src/core/presets/PresetRegistry.ts
 import type { IPreset } from '../../types/preset';
-
-
 
 export const BUILT_IN_PRESETS: IPreset[] = [
     {
